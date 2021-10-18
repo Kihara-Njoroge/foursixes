@@ -1,0 +1,11 @@
+{% extends 'blank.html' %}
+{% load static %}
+    {% block content_block %}
+        <div class="center-div " style="height: 100vh;">
+            <div class="text-center">
+            <img src="{% static 'img/black_tick.webp' %}" alt="payment_success" class="w-50">
+            <h2 class="pt-3"> Payment is successful :)</h2>
+            <p>You can now head back to <a href="{% url 'index' %}" style="text-decoration:underline;">Home</a> and shop again.</p>
+            </div>
+        </div>
+    {% endblock %}

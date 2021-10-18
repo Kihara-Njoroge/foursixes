@@ -1,0 +1,86 @@
+{% extends 'blank.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %} " />
+{% endblock %} {% block title %}
+<title>Slicks|Checkout</title>
+{% endblock %} {% block content_block %}
+<main>
+    <div class="container-fluid">
+    <div class="min-height-80 checkout-main">
+    <div class="sa-container">
+            <h3 class="sa-card-header">Order Summary</h3>
+            <div class="sa-card"> 
+                <h3 class="sa-card-subheader">Shipping Address</h3>
+                <div class="sa-address">{{ address.address }}</div>
+                <div class="sa-misc">
+                    <div class="sa-misc-info"><strong>State: </strong><span>{{ address.state }}</span></div>
+                    <div class="sa-misc-info"><strong>City: </strong><span>{{ address.city }}</span></div>
+                    <div class="sa-misc-info"><strong>ZipCode: </strong><span>{{ address.zipcode }}</span></div>
+                </div>
+            </div>
+            <div class="bill-card">
+            <h3 class="sa-card-subheader">BILLING DETAILS</h3>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Items</span
+                  ><span data-bag-totalitems>{{ order.total_quant }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Bag Total</span
+                  ><strong
+                    >₹<span data-bag-totalprice
+                      > {{ bag_total }} </span
+                    ></strong
+                  >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Shipping Charges</span
+                  ><span
+                    >₹<span id="shipping-cost">{{ shipping_cost }}</span></span
+                  >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span><strong>Total Amount</strong></span>
+                  <strong
+                    >₹<span id="payable_amount"
+                      >{{ order.total_price }}</span
+                    ></strong
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="pay-btn-container">
+            <button class="btn btn-dark" id="pay-btn">Pay Now</button>
+        </div>
+    </div>
+    </div>
+</div>
+</main>
+{% endblock %}
+{% block bottom_scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{ razorpay_merchant_key }}", // Enter the Key ID generated from the Dashboard
+    "amount": "{{ razorpay_amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "{{ currency }}",
+    "name": "Slicks",
+    "description": "You are slick",
+    "order_id": "{{ razorpay_order_id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "{{ callback_url }}",
+    {% if user.is_authenticated %}
+    "prefill": {
+        "name": "{{ user.get_full_name }}",
+        "email": "{{ user.email }}",
+        "contact": "{{ user.phno }}"
+    }
+    {% endif %}
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('pay-btn').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock %}

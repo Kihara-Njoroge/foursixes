@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% load static %} {% block link %}
+<link rel="stylesheet" href='{% static "css/login.css" %}' />
+{% endblock %} {% block title %}
+<title>Slicks | Signin</title>
+{% endblock %} {% block content_block %}
+<main class="center-div" style="min-height: 80vh; padding: 10px 0">
+  <div class="reg-container">
+    <div class="reg-links">
+      {% block reglink %}
+      <div>
+        <a href="{% url 'accounts:login' %}" class="reg-link link-active"
+          >SIGN IN</a
+        >
+        <a href="{% url 'accounts:signup' %}">SIGN UP</a>
+      </div>
+      {% endblock %}
+      <div>
+        <a style="cursor: pointer" id="resetformbtn">RESET</a>
+      </div>
+    </div>
+    <div class="reg-form-container">
+      {% block registration_form %}
+      <form method="POST" class="reg-form" id="reg-form">
+        {% csrf_token %} {% if form.errors %}
+        <div
+          class="alert alert-light text-danger alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Username and Password did not match !</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endif %} {% comment %}
+        <div
+          class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x"
+          id="toastPlacement"
+        >
+          <div
+            class="toast align-items-center text-danger border-0"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div class="d-flex">
+              <div class="toast-body">
+                Hello, world! This is a toast message.
+              </div>
+              <button
+                type="button"
+                class="btn-close me-2 m-auto"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+        </div>
+        {% endcomment %}
+        {% render_field form.email class="reg-ip" id="email" placeholder="Email"%}
+        {% render_field form.password id="password" class="reg-ip" placeholder="Password"%}
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        <button type="submit" class="btn btn-dark reg-btn">Sign in</button>
+      </form>
+      {% endblock %}
+    </div>
+    <span class="or-section">
+      <div class="line"></div>
+      &nbsp;OR&nbsp;
+      <div class="line"></div>
+    </span>
+    <div class="social-login">
+      <button class="btn reg-btn social-btn google">
+        Sign In With Google
+        <img src="{% static 'img/googlecolor.svg' %}" alt="google" />
+      </button>
+      <button class="btn reg-btn social-btn twitter">
+        Sign In With Twitter
+        <img src="{% static 'img/twittercolor.svg' %}" alt="twitter" />
+      </button>
+    </div>
+  </div>
+</main>
+
+{% endblock %} {% block bottom_scripts %}
+<script>
+  let resetformbtn = document.getElementById("resetformbtn");
+  let regform = document.getElementById("reg-form");
+  resetformbtn.addEventListener("click", function () {
+    regform.reset();
+  });
+</script>
+{% endblock %}

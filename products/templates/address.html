@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% load static %} {% load widget_tweaks %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %} " />
+<style>
+    .form-control:focus{
+        border-color: #212529;
+        box-shadow: none;
+    }
+</style>
+{% endblock %} {% block title %}
+<title>Slicks|Cart</title>
+{% endblock %} {% block content_block %}
+<main>
+  {% include 'alert-component.html' %}
+  <div class="container">
+    <form action="{% url 'products:checkout' %}" method='POST'>{% csrf_token %}
+    <div class="row justify-content-around">
+    <div class="col-12 col-md-6">
+        <div class="cp-items-total">
+            Specify shipping details
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="fname" value="{{ user.first_name }}" disabled>
+            </div>
+            <div class="col-md-6">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lname" value="{{ user.last_name }}" disabled>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                {% render_field form.address class='form-control' id="inputAddress" %}
+            </div>
+            <div class="col-md-5">
+                <label for="inputCity" class="form-label">City</label>
+                {% render_field form.city class='form-control' id="inputCity"%}
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+                {% render_field form.state class='form-control' id="inputState"%}
+            </div>
+            <div class="col-md-3">
+                <label for="inputZip" class="form-label">Zip</label>
+                {% render_field form.zipcode class='form-control' id="inputZip"%}
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    {% render_field form.primary class='form-check-input' id="gridCheck"%}
+                <label class="form-check-label" for="gridCheck">
+                   Primary Address
+                </label>
+                </div>
+            </div>
+            </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="side-box">
+        <div style="padding: 1rem 0px;letter-spacing: 1px;">BILLING DETAIL</div>
+        <div class="bill-card">
+            <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between">
+                <span>Items</span
+                ><span data-bag-totalitems>{{ cart.total_quant }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                <span>Bag Total</span
+                ><strong
+                    >₹<span data-bag-totalprice
+                    > {{ cart.total_price }}</span
+                    ></strong
+                >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                <span>Shipping Charges</span
+                ><span
+                    >₹<span id="shipping-cost">{{ shipping_cost }}</span></span
+                >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                <span><strong>Total Amount</strong></span>
+                <strong
+                    >₹<span id="payable_amount"
+                    >{{ payable_amount }}</span
+                    ></strong
+                >
+                </li>
+            </ul>
+            </div>
+        </div>
+            
+            <button type="submit" class="btn btn-dark buy-btn" id="place-order">Continue</button>
+        </div>
+    </div>
+    </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

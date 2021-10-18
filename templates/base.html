@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+{% load cart_item_count %}
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link href="http://fonts.cdnfonts.com/css/fashion" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href='{% static "css/main.css" %}' />
+
+    {% block link %} {% endblock %} {% block title %}
+    <title>Infinity Fashion</title>
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-container">
+          <button
+            type="button"
+            class="nav-mobile-toggle"
+            data-bs-toggle="modal"
+            data-bs-target="#nav-mobile-container"
+          >
+            <i class="bi bi-list"></i>
+          </button>
+          <a href="{% url 'index' %}">
+            <div class="nav-logo">
+              <h2 style="font-family: 'Fashion', sans-serif; font-weight: bold; color: hotpink;display: flex;">
+                InfinityFashion
+                
+             </h2>
+            </a>
+            </div>
+          </a>
+          <div class="nav-links">
+            <div class="nav-link">
+              <a href="{% url 'products:shop_gender' type='clothes' %}">Clothes</a>
+            </div>
+            <div class="nav-link">
+              <a href="{% url 'products:shop_gender' type='shoes' %}"
+                >Shoes</a
+              >
+            </div>
+            <div class="nav-link">
+              <a href="{% url 'products:shop_gender' type='watches' %}">Watches</a>
+            </div>
+            <div class="nav-link">
+              <a href="{% url 'products:shop_gender' type='lingerie' %}">Lingerie</a>
+            </div>
+            <div class="nav-link">
+              <a href="{% url 'products:shop_gender' type='beauty' %}">Bags</a>
+            </div>
+          </div>
+          <div class="nav-search">
+            <form action=" {% url 'products:search' %} " method="get" class="search-form">
+              <i class="bi bi-search search-icon"></i>
+              <input
+                type="text"
+                name="q"
+                id="search"
+                placeholder="Search products"
+                required
+              />
+            </form>
+          </div>
+          <div class="nav-actions">
+            <div class="nav-action" id="profile">
+              <i class="bi bi-person"></i>
+              <div class="profile-dropdown">
+                {% if user.is_authenticated %}
+                <a href="#"><i class="bi bi-person-fill"></i> Account</a>
+                <a href="#"><i class="bi bi-box-seam"></i>My&nbsp;Orders</a>
+                <a href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}"><i class="bi bi-box-arrow-in-right"></i> Signin</a>
+                {% endif %}
+              </div>
+            </div>
+            <div class="nav-action" id="wishlist">
+              <a href="{% url 'products:wishlist' %}">
+                <i class="bi bi-suit-heart"></i>
+              </a>
+            </div>
+            <div class="nav-action" id="bag">
+              <a href="{% url 'products:cart' %}">
+                <i class="bi bi-handbag"></i>
+              </a>
+              <div id="bag-count">{% item_count request %}</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div
+        id="nav-mobile-container"
+        class="modal slideover fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modal-smallLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-slideover modal-sm"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-smallLabel">
+                Shop by category
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+            <form action=" {% url 'products:search' %} " method="get" class="mobile-search-form">
+              <i class="bi bi-search mobile-search-icon"></i>
+              <input
+                type="text"
+                name="q"
+                id="mobile-search"
+                placeholder="Search products"
+                required
+              />
+            </form>
+              <div class="nav-link">
+                <a href="{% url 'products:shop_gender' type='clothes' %}">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                  >
+                    <path
+                      d="M16.5 13.5c0 .828-.56 1.5-1.25 1.5s-1.25-.672-1.25-1.5.56-1.5 1.25-1.5 1.25.672 1.25 1.5zm-7.75-1.5c-.69 0-1.25.672-1.25 1.5s.56 1.5 1.25 1.5 1.25-.672 1.25-1.5-.56-1.5-1.25-1.5zm15.25 2.313c0 1.765-.985 3.991-3.139 4.906-2.063 3.295-4.987 5.781-8.861 5.781-3.741 0-6.846-2.562-8.861-5.781-2.154-.916-3.139-3.142-3.139-4.906 0-2.053.754-3.026 1.417-3.489-.39-1.524-1.03-5.146.963-7.409.938-1.065 2.464-1.54 4.12-1.274.719-1.532 3.612-2.141 5.5-2.141 3 0 6.609.641 9.141 3.516 1.969 2.236 1.648 5.741 1.388 7.269.676.446 1.471 1.419 1.471 3.528zm-9.6 4.687h-4.8s.678 1.883 2.4 1.883c1.788 0 2.4-1.883 2.4-1.883zm7.063-6.508c-4.11.393-7.778-3.058-9.073-5.274-.081.809.186 2.557.969 3.355-3.175.064-5.835-1.592-7.46-3.868-.837 1.399-1.242 3.088-1.242 4.775 0 .722-.746 1.208-1.406.914-.14-.063-.436-.101-.671.053-1 .648-.895 4.183 1.553 5.012.224.076.413.228.536.43.655 1.086 1.354 1.98 2.086 2.722.922.633 1.056-1.875 1.667-2.72.686-.949 2.455-1.126 3.578-.322 1.124-.804 2.892-.627 3.578.322.611.846.745 3.354 1.667 2.72.731-.741 1.43-1.636 2.086-2.722.123-.202.313-.354.536-.43 2.363-.8 2.596-4.185 1.596-4.967z"
+                    />
+                  </svg>
+                  MEN</a
+                >
+              </div>
+              <div class="nav-link">
+                <a href="{% url 'products:shop_gender' type='shoes' %}">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="26"
+                    height="24"
+                    viewBox="0 0 26 24"
+                  >
+                    <path
+                      d="M17.5 12.5c0 .828-.56 1.5-1.25 1.5s-1.25-.672-1.25-1.5.56-1.5 1.25-1.5 1.25.672 1.25 1.5zm-7.75-1.5c-.69 0-1.25.672-1.25 1.5s.56 1.5 1.25 1.5 1.25-.672 1.25-1.5-.56-1.5-1.25-1.5zm3.25 8.354c2.235 0 3-2.354 3-2.354h-6s.847 2.354 3 2.354zm13 3.639c-2.653 1.714-5.418 1.254-6.842-1.488-1.672 1.505-3.706 2.487-6.158 2.487-2.53 0-4.517-.91-6.184-2.445-1.431 2.702-4.178 3.15-6.816 1.446 4.375-1.75-2.729-11.813 4.104-19.375 2.282-2.525 5.472-3.618 8.896-3.618s6.614 1.093 8.896 3.618c6.833 7.562-.271 17.625 4.104 19.375zm-5.668-6.111c.122-.202.312-.354.535-.43 2.447-.828 2.554-4.361 1.554-5.012-.235-.152-.531-.115-.672-.053-.664.295-1.406-.194-1.406-.914 0-.471-.034-1.001-.096-1.473h-10.101c-.813-1.021-.771-2.945-.396-4.57-.903.982-1.693 3.249-1.875 4.57h-2.121c-.062.472-.096 1.002-.096 1.473 0 .72-.742 1.209-1.406.914-.141-.062-.436-.1-.672.053-1 .651-.893 4.184 1.554 5.012.224.076.413.228.535.43 1.709 2.829 4.015 5.111 7.332 5.111 3.316 0 5.623-2.283 7.331-5.111z"
+                    />
+                  </svg>
+                  WOMEN</a
+                >
+              </div>
+              <div class="nav-link">
+                <a href="#">
+                  <svg
+                    width="24"
+                    height="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                  >
+                    <path
+                      d="M24 19v-7c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-22c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v7h1v-2h22v2h1zm-1-6.5c0-.133-.053-.26-.146-.354-.094-.093-.221-.146-.354-.146h-21c-.133 0-.26.053-.354.146-.093.094-.146.221-.146.354v3.5h22v-3.5zm-20-2.5v-3.5c0-.276.224-.5.5-.5h17c.276 0 .5.224.5.5v3.5h1v-4c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-18c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v4h1zm2 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm8 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm-3-1v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4zm8 0v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4z"
+                    />
+                  </svg>
+                  HOME</a
+                >
+              </div>
+              <div class="nav-link">
+                <a href="#"><i class="bi bi-journal"></i>JOURNAL</a>
+              </div>
+              <div class="nav-mobile-misc">
+                <div class="" id="">
+                  <a href="{% url 'products:wishlist' %}">
+                    <i class="bi bi-suit-heart"></i>Wishlist
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {% block content_block %} {% endblock %}
+
+    <footer class="footer-wrapper">
+      <div class="footer-container">
+        <div class="footer-main">
+          <div class="footer-links">
+            <p class="footer-links-header">Social</p>
+            <div class="footer-link">
+              <a
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                href="https://www.instagram.com/"
+                style="color: inherit"
+                ><div class="footer-social">
+                  <i class="bi bi-instagram"></i>
+                  <p class="footer-link-name">Instagram</p>
+                </div></a
+              >
+            </div>
+
+            <div class="footer-link">
+              <a
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                href="https://twitter.com/"
+                style="color: inherit"
+                ><div class="footer-social">
+                  <i class="bi bi-twitter"></i>
+                  <p class="footer-link-name">Twitter</p>
+                </div></a
+              >
+            </div>
+
+            <div class="footer-link">
+              <a
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                href="https://facebook.com/"
+                style="color: inherit"
+                ><div class="footer-social">
+                  <i class="bi bi-twitter"></i>
+                  <p class="footer-link-name">Facebook</p>
+                </div></a
+              >
+            </div>
+
+            <div class="footer-link">
+              <a
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                href="https://www.youtube.com"
+                style="color: inherit"
+                ><div class="footer-social">
+                  <i class="bi bi-youtube"></i>
+                  <p class="footer-link-name">Youtube</p>
+                </div></a
+              >
+            </div>
+          </div>
+          <div class="footer-links">
+            <p class="footer-links-header">Company</p>
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">About Us</p>
+              </a>
+            </div>
+
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">Careers</p>
+              </a>
+            </div>
+
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">Blog</p>
+              </a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <p class="footer-links-header">Support</p>
+
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">Contact Us</p>
+              </a>
+            </div>
+
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">Help Center</p>
+              </a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <p class="footer-links-header">Business</p>
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">Affiliates</p>
+              </a>
+            </div>
+            <div class="footer-link">
+              <a target="_blank" href="#" style="color: inherit">
+                <p class="footer-link-name">Wholesale</p>
+              </a>
+            </div>
+          </div>
+          <div class="footer-cta">
+            <p class="b2 b3 e6 cr cs">Subscribe</p>
+            <form class="footer-cta-form">
+              <!-- <div class="ae ag ap"> -->
+              <input
+                placeholder="Your email address"
+                name="email"
+                outline="none"
+                d="flex"
+                class="cta-input"
+              />
+              <button class="btn btn-dark">Subscribe</button>
+              <!-- </div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="black-footer-bottom">
+        <p class="footer-bottom-text">© 2021 Infinity Fashion, Kenya.</p>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/base.js' %}">
+    </script>
+    {% block bottom_scripts %}{% endblock %}
+  </body>
+</html>

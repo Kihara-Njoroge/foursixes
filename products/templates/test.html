@@ -1,0 +1,61 @@
+{% extends 'blank.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %} " />
+{% endblock %} {% block title %}
+<title>Slicks|Checkout</title>
+{% endblock %} {% block content_block %}
+<main>
+    <div class="container-fluid">
+    <div class="min-height-80 checkout-main">
+    <div class="sa-container">
+            <h3 class="sa-card-header">Order Summary</h3>
+            <div class="sa-card"> 
+                <h3 class="sa-card-subheader">Shipping Address</h3>
+                <div class="sa-address">Housing Society, B/201, Gandhi Road, Andheri(W), Mumbai.</div>
+                <div class="sa-misc">
+                    <div class="sa-misc-info"><strong>State: </strong><span>Maharashtra</span></div>
+                    <div class="sa-misc-info"><strong>City: </strong><span>Mumbai</span></div>
+                    <div class="sa-misc-info"><strong>ZipCode: </strong><span>401111</span></div>
+                </div>
+            </div>
+            <div class="bill-card">
+            <h3 class="sa-card-subheader">BILLING DETAILS</h3>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Items</span
+                  ><span data-bag-totalitems>{# {{ cart.total_quant }} #} 3</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Bag Total</span
+                  ><strong
+                    >₹<span data-bag-totalprice
+                      > {# {{ cart.total_price }} #} 751</span
+                    ></strong
+                  >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Shipping Charges</span
+                  ><span
+                    >₹<span id="shipping-cost">{# {{ shipping_cost }} #}50</span></span
+                  >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span><strong>Total Amount</strong></span>
+                  <strong
+                    >₹<span id="payable_amount"
+                      >{# {{ payable_amount }} #}4512</span
+                    ></strong
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="pay-btn-container">
+            <button class="btn btn-dark" id="pay-btn">Pay Now</button>
+        </div>
+    </div>
+    </div>
+</div>
+</main>
+{% endblock %}
+

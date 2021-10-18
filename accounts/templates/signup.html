@@ -1,0 +1,70 @@
+{% extends 'login.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}
+<title>Slicks | Signup</title>
+{% endblock %}
+
+
+{% block reglink %}
+      <div>
+        <a href="{% url 'accounts:login' %}" class="reg-link">SIGN IN</a>
+        <a href="{% url 'accounts:signup' %}" class="reg-link link-active">SIGN UP</a>
+      </div>
+{% endblock %}
+{% block registration_form %}
+          <form method="POST" class="reg-form" id="reg-form">
+            {% csrf_token %}
+            {% for error in form.non_field_errors %}
+            <div class="has-errors text-danger small">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% if form.email.errors %} {{form.email.errors}} {% endif %}
+            {% if form.password1.errors %} {{form.password1.errors}} {% endif %}
+            {% if form.password2.errors %} {{form.password2.errors}} {% endif %}
+            {% if form.phno.errors %} {{form.phno.errors}} {% endif %}
+            <div class="d-flex">
+
+            {% comment %} ToDo: render form-fields using widget_tweaks {% endcomment %}
+            {% render_field form.first_name id="first_name" class="reg-ip" placeholder="First Name" required="true"%}
+            {% render_field form.last_name id="last_name" class="reg-ip" placeholder="Last Name" required="true"%}
+            </div>
+            {% render_field form.email class="reg-ip" placeholder="Email"%}
+            {% render_field form.phno id="phno" class="reg-ip" placeholder="Phone"%}
+            <div class="validators" id="phone-validator">
+              <ul>
+                <li class="text-danger">Enter a valid 10 digit phone number</li>
+              </ul>
+            </div>
+            {% render_field form.password1 id="pass1" class="reg-ip" placeholder="Password"%}
+            <div class="validators" id="validatepass">
+              <ul>
+                <li class="text-danger" id="up-validator">
+                  a uppercase letter
+                </li>
+                <li class="text-danger" id="low-validator">
+                  a lowercase letter
+                </li>
+                <li class="text-danger" id="num-validator">a number</li>
+                <li class="text-danger" id="len-validator">
+                  minimum 8 characters
+                </li>
+              </ul>
+            </div>
+            {% render_field form.password2 id="pass2" class="reg-ip" placeholder="Re-enter Password"%}
+            <div class="validators" id="matchpass">
+              <ul>
+                <li class="text-danger">Passwords do not match!</li>
+              </ul>
+            </div>
+            {% render_field form.captcha %}
+            <button type="submit" class="btn btn-dark reg-btn" id='reg-submit-btn'>Sign up</button>
+          </form>
+{% endblock  %}
+
+
+ {% block bottom_scripts %}
+ {{ block.super }}
+ <script src="{% static 'js/signup.js' %}"></script>
+ {% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %} " />
+{% endblock %} {% block title %}
+<title>Slicks|Cart</title>
+{% endblock %} {% block content_block %}
+<main>
+  {% include 'alert-component.html' %} {% if cart_items %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <div class="cp-items-total">
+          <div>
+            My Bag (<span data-bag-totalitems>{{ cart.total_quant }}</span>
+            Items)
+          </div>
+          <div>
+            Total: ₹<span data-bag-totalprice>{{ cart.total_price }}</span>
+          </div>
+        </div>
+        <div class="cart-list">
+          {% for item in cart_items %}
+          <div class="cart-product" data-prod-div-citemid="{{ item.id }}">
+            <div class="cp-info row">
+              <div class="cp-img col-sm-3 col-3">
+                <img src="{{ item.product.img1.url }}" alt="img" />
+              </div>
+              <div class="cp-info-right col-sm-9 col-9">
+                <div class="row g-0" style="height: 100%">
+                  <div class="col-sm-10">
+                    <div class="cp-brand">{{ item.product.brand }}</div>
+                    <div class="cp-name">{{ item.product.name }}</div>
+                    <div class="cp-size-quant">
+                      <div class="cp-size">Size: {{item.size}}</div>
+                      <span>|</span>
+                      <div class="cp-quant">
+                        <label for="pd-quant-{{ forloop.counter }}">Qty: </label>
+                        <select name="quant" id="pd-quant-{{ forloop.counter }}" class="select-pd-quant" data-citemid="{{ item.id }}">
+                          <option value="1" {% if item.quant == 1 %}selected{% endif %}>1</option>
+                          <option value="2" {% if item.quant == 2 %}selected{% endif %}>2</option>
+                          <option value="3" {% if item.quant == 3 %}selected{% endif %}>3</option>
+                          <option value="4" {% if item.quant == 4 %}selected{% endif %}>4</option>
+                          <option value="5" {% if item.quant == 5 %}selected{% endif %}>5</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div>
+                      <strong
+                        >{{ item.product.price }} X
+                        <span data-item-quant="{{ item.id }}"
+                          >{{ item.quant }}</span
+                        ></strong
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cp-btns">
+              <button class="btn remove-btn" data-citemid="{{ item.id }}">
+                Remove
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="side-box">
+          <!-- BILLING DETAILS -->
+          <div style="padding: 1rem 0px;letter-spacing: 1px;">BAG SUMMARY</div>
+          <div class="bill-card">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Items</span
+                  ><span data-bag-totalitems>{{ cart.total_quant }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Bag Total</span
+                  ><strong
+                    >₹<span data-bag-totalprice
+                      >{{ cart.total_price }}</span
+                    ></strong
+                  >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Shipping Charges</span
+                  ><span
+                    >₹<span id="shipping-cost">{{ shipping_cost }}</span></span
+                  >
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span><strong>Total Amount</strong></span>
+                  <strong
+                    >₹<span id="payable_amount"
+                      >{{ payable_amount }}</span
+                    ></strong
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <form action="{% url 'products:address_page' %}" method="get">
+            <button type="submit" class="btn btn-dark buy-btn" id="place-order">PLACE ORDER</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="center-div min-height-80">
+    <img
+      src="{% static 'img/empty_bag.png' %}"
+      alt="bag empty"
+      class="empty-cart-img"
+    />
+  </div>
+  {% endif %}
+</main>
+{% endblock %} {% block bottom_scripts %}
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

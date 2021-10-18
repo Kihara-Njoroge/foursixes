@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/pdlist.css' %} ">
+{% endblock  %}
+
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+
+{% block content_block %}
+    <main>
+      <div class="container-fluid">
+      <div style="width: 100%;height: 50px;"></div>
+      <div style="width: 100%;height: 50px;"><i class="bi bi-funnel"></i>FILTER</div>
+      <div class="results-container d-flex">
+        <div class="results-left-container ">
+          <div class="filter">
+            <form action="" method="get">
+              <section class="filter-section filter-category">
+                <h6 class="filter-title">category</h6>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1" id="catshirts" name="category">
+                  <label class="form-check-label" for="catshirts">Shirts</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="2" id="cattshirts" name="category">
+                  <label class="form-check-label" for="cattshirts">T-Shirts</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="3" id="catsweatshirts" name="category">
+                  <label class="form-check-label" for="catsweatshirts">Sweatshirts</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="4" id="catjackets" name="category">
+                  <label class="form-check-label" for="catjackets">Jackets</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="5" id="cattanktops" name="category">
+                  <label class="form-check-label" for="cattanktops">Tanktops</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="6" id="catblazers" name="category">
+                  <label class="form-check-label" for="catblazers">Blazers</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="7" id="catdress" name="category">
+                  <label class="form-check-label" for="catdress">Dress</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="8" id="catjeans" name="category">
+                  <label class="form-check-label" for="catjeans">Jeans</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="9" id="catshorts" name="category">
+                  <label class="form-check-label" for="catshorts">Shorts</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="10" id="cattrkpants" name="category">
+                  <label class="form-check-label" for="cattrkpants">Track Pants</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="11" id="cattrousers" name="category">
+                  <label class="form-check-label" for="cattrousers">Trousers</label>
+                </div>
+              </section>
+              <section class="filter-section filter-brand">
+                <h6 class="filter-title">Brand</h6>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="network" id="network" name='brand'>
+                  <label class="form-check-label" for="network">Network</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="mufti" id="mufti" name='brand'>
+                  <label class="form-check-label" for="mufti">Mufti</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="anthem" id="anthem" name='brand'>
+                  <label class="form-check-label" for="anthem">Anthem</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="blue saint" id="blue_saint" name='brand'>
+                  <label class="form-check-label" for="blue_saint">Blue Saint</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="dennis lingo" id="dennis_lingo" name='brand'>
+                  <label class="form-check-label" for="dennis_lingo">Dennis Lingo</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="balista" id="balista" name='brand'>
+                  <label class="form-check-label" for="balista">Balista</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="hue" id="hue" name='brand'>
+                  <label class="form-check-label" for="hue">Hue</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="harbour" id="harbour" name='brand'>
+                  <label class="form-check-label" for="harbour">Harbour</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="flyrs" id="flyrs" name='brand'>
+                  <label class="form-check-label" for="flyrs">Flyrs</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="up" id="brand-up" name='brand'>
+                  <label class="form-check-label" for="brand-up">UP</label>
+                </div>
+              </section>
+              <section class="filter-section">
+                <h6 class="filter-title">Price</h6>
+                <div slider id="slider-distance">
+                  <div>
+                    <div inverse-left style="width:70%;"></div>
+                    <div inverse-right style="width:70%;"></div>
+                    <div range style="left:0%;right:0%;"></div>
+                    <span thumb style="left:0%;"></span>
+                    <span thumb style="left:100%;"></span>
+                    <div sign style="left:0%;">
+                      <span id="value">800</span>
+                    </div>
+                    <div sign style="left:100%;">
+                      <span id="value">10000</span>
+                    </div>
+                  </div>
+                  <input type="range" value="200" max="10000" min="200" step="1" name="price_down" oninput="
+                  this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                  let value = (this.value/parseInt(this.max))*100
+                  var children = this.parentNode.childNodes[1].childNodes;
+                  children[1].style.width=value+'%';
+                  children[5].style.left=value+'%';
+                  children[7].style.left=value+'%';children[11].style.left=value+'%';
+                  children[11].childNodes[1].innerHTML=this.value;" />
+
+                  <input type="range" value="4999" max="4999" min="200" step="1" name="price_up" oninput="
+                  this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+                  let value = (this.value/parseInt(this.max))*100
+                  var children = this.parentNode.childNodes[1].childNodes;
+                  children[3].style.width=(100-value)+'%';
+                  children[5].style.right=(100-value)+'%';
+                  children[9].style.left=value+'%';children[13].style.left=value+'%';
+                  children[13].childNodes[1].innerHTML=this.value;" />
+              </div>
+              </section>
+              <section class= "filter-section filter-btns-container">
+                <button type="submit" class="btn btn-dark filter-btns">Apply</button>
+                <button type="reset" class="btn btn-dark filter-btns" >Reset</button>
+              </section>
+            </form>
+          </div>
+        </div>
+        <div class="results-right-container" >
+          <div class="results row">
+          {% for product in pdlist %}
+            <div class="col col-6 col-sm-6 col-md-4 col-xl-3">
+              <div class="product">
+                <a href=" {% url 'products:shop_product' uqid=product.uqid %} " target="_blank">
+                  <div class="product-img">
+                        <img src="{{ product.img1.url }}" alt="{{ product.name }}">
+                  </div>
+                  <div class="product-description">
+                        <div class="pd-brand">{{ product.brand }}</div>
+                        <div class="pd-name">{{ product.name }}</div>
+                        <div class="pd-price">RS.&nbsp;{{ product.price }}</div>
+                  </div>
+                </a>
+              </div>  
+            </div>
+          {% empty %}
+            <div class="center-div">Oops! No match found :(</div>
+          {% endfor %}
+          </div>
+        </div>
+    </main>
+    
+    <div class="filter-mobile-btn-cont">
+      <!-- <i class="bi bi-funnel"></i> -->
+      <button class="btn btn-dark filter-mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasfilter" aria-controls="offcanvasfilter">Filter
+      </button>
+    </div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasfilter" aria-labelledby="Filter">
+  <div class="offcanvas-header off">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">FILTER</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="filter">
+      <form action="" method="get">
+        <section class="filter-section filter-category">
+          <h6 class="filter-title">category</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" id="catshirts" name="category">
+            <label class="form-check-label" for="catshirts">Shirts</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="2" id="cattshirts" name="category">
+            <label class="form-check-label" for="cattshirts">T-Shirts</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="3" id="catsweatshirts" name="category">
+            <label class="form-check-label" for="catsweatshirts">Sweatshirts</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="4" id="catjackets" name="category">
+            <label class="form-check-label" for="catjackets">Jackets</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="5" id="cattanktops" name="category">
+            <label class="form-check-label" for="cattanktops">Tanktops</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="6" id="catblazers" name="category">
+            <label class="form-check-label" for="catblazers">Blazers</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="7" id="catdress" name="category">
+            <label class="form-check-label" for="catdress">Dress</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="8" id="catjeans" name="category">
+            <label class="form-check-label" for="catjeans">Jeans</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="9" id="catshorts" name="category">
+            <label class="form-check-label" for="catshorts">Shorts</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="10" id="cattrkpants" name="category">
+            <label class="form-check-label" for="cattrkpants">Track Pants</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="11" id="cattrousers" name="category">
+            <label class="form-check-label" for="cattrousers">Trousers</label>
+          </div>
+        </section>
+        <section class="filter-section filter-brand">
+          <h6 class="filter-title">Brand</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="network" id="network" name='brand'>
+            <label class="form-check-label" for="network">Network</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="mufti" id="mufti" name='brand'>
+            <label class="form-check-label" for="mufti">Mufti</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="anthem" id="anthem" name='brand'>
+            <label class="form-check-label" for="anthem">Anthem</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="blue saint" id="blue_saint" name='brand'>
+            <label class="form-check-label" for="blue_saint">Blue Saint</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="dennis lingo" id="dennis_lingo" name='brand'>
+            <label class="form-check-label" for="dennis_lingo">Dennis Lingo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="balista" id="balista" name='brand'>
+            <label class="form-check-label" for="balista">Balista</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="hue" id="hue" name='brand'>
+            <label class="form-check-label" for="hue">Hue</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="harbour" id="harbour" name='brand'>
+            <label class="form-check-label" for="harbour">Harbour</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="flyrs" id="flyrs" name='brand'>
+            <label class="form-check-label" for="flyrs">Flyrs</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="up" id="brand-up" name='brand'>
+            <label class="form-check-label" for="brand-up">UP</label>
+          </div>
+        </section>
+        <section class="filter-section">
+          <h6 class="filter-title">Price</h6>
+          <div slider id="slider-distance">
+              <div>
+                <div inverse-left style="width:70%;"></div>
+                <div inverse-right style="width:70%;"></div>
+                <div range style="left:0%;right:0%;"></div>
+                <span thumb style="left:0%;"></span>
+                <span thumb style="left:100%;"></span>
+                <div sign style="left:0%;">
+                  <span id="value">200</span>
+                </div>
+                <div sign style="left:100%;">
+                  <span id="value">4999</span>
+                </div>
+              </div>
+              <input type="range" value="200" max="4999" min="200" step="1" name="price_down" oninput="
+              this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+              let value = (this.value/parseInt(this.max))*100
+              var children = this.parentNode.childNodes[1].childNodes;
+              children[1].style.width=value+'%';
+              children[5].style.left=value+'%';
+              children[7].style.left=value+'%';children[11].style.left=value+'%';
+              children[11].childNodes[1].innerHTML=this.value;" />
+
+              <input type="range" value="4999" max="4999" min="200" step="1" name="price_up" oninput="
+              this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+              let value = (this.value/parseInt(this.max))*100
+              var children = this.parentNode.childNodes[1].childNodes;
+              children[3].style.width=(100-value)+'%';
+              children[5].style.right=(100-value)+'%';
+              children[9].style.left=value+'%';children[13].style.left=value+'%';
+              children[13].childNodes[1].innerHTML=this.value;" />
+          </div>
+        </section>
+        <section class= "filter-section filter-btns-container">
+          <button type="submit" class="btn btn-dark filter-btns">Apply</button>
+          <button type="reset" class="btn btn-dark filter-btns" >Reset</button>
+        </section>
+      </form>
+    </div>
+  </div>
+</div>  
+{% endblock %}
+   

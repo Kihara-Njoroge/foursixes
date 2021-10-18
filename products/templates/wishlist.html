@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/wlist.css' %} " />
+{% endblock %} {% block title %}
+<title>Slicks|Wishlist</title>
+{% endblock %} {% block content_block %}
+<main class="min-height-80">
+  <div class="container">
+    <div class="results row">
+      <div class="wlist-items-total">
+        <div>My Wishlist</div>
+        <div>{{ pdlist|length }} Items</div>
+      </div>
+      {% if pdlist %} {% for product in pdlist %}
+      <div class="col col-6 col-sm-6 col-md-4 col-xl-3">
+        <div class="product">
+          <a
+            href=" {% url 'products:shop_product' uqid=product.uqid %} "
+            target="_blank"
+          >
+            <div class="product-img">
+              <img src="{{ product.img1.url }}" alt="{{ product.name }}" />
+            </div>
+            <div class="product-description">
+              <div class="pd-brand">{{ product.brand }}</div>
+              <div class="pd-name">{{ product.name }}</div>
+              <div class="pd-price">RS.&nbsp;{{ product.price }}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-12 center-div height-80 empty-wlist">Your wishlist is empty. Tap Wishlist button to see products here.</div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/pdp.css' %} ">
+  <script>
+    let is_loggedin;
+    {% if user.is_authenticated %}
+    is_loggedin = true;
+    {% else %}
+    is_loggedin = false;
+    {% endif %}
+    
+  </script>
+{% endblock  %}
+{% block title %}<title>{{ title }}</title>{% endblock  %}
+
+{% block content_block %}
+    <main>
+      <div class="container product-main" >
+         {% include 'alert-component.html' %}
+        <div class="pt-5 rmtop">
+          <div class="product-container">
+            <div class="product-img-container" id="product-img-container">
+              <img src="{{ product.img1.url }}" alt="product" class="product-img" id='product-img' />
+            </div>
+            <div class="product-details-container" id="product-details-container">
+              <div class="pd-brand">{{ product.brand }}</div>
+              <div class="pd-name">{{ product.name }}</div>
+              <div>
+                <div class="pd-price">Rs. {{ product.price }}</div>
+                <small class="text-success">inclusive of all taxes</small>
+              </div>
+
+              <div class="pd-size-container">
+                <div class="pd-size center-div" data-size='xsm'>XSM</div>
+                <div class="pd-size center-div" data-size='sm'>S</div>
+                <div class="pd-size center-div" data-size='m'>M</div>
+                <div class="pd-size center-div" data-size='l'>L</div>
+                <div class="pd-size center-div" data-size='xl'>XL</div>
+              </div>
+              <div class="text-danger d-none" id="size-alert"><small>Please select a size.</small></div>
+              <div class="pd-quant-container">
+                <label for="pd-quant">Qty: </label>
+                <select name="quant" id="pd-quant" required>
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="pd-buttons">
+                <button class="btn btn-dark pd-button" data-uqid={{product.uqid}} id='bag-btn'>
+                  <i class="bi bi-handbag-fill"></i>Add to Bag
+                </button>
+                {% csrf_token %}
+                {% if is_wishlisted %}
+                <button class="btn btn-love pd-button" id='wishlist-btn' data-uqid={{product.uqid}}>
+                  <i class="bi bi-suit-heart-fill" id="wlist-icon"></i>Wishlisted
+                </button>
+                {% else %}
+                <button class="btn btn-love pd-button" id='wishlist-btn' data-uqid={{product.uqid}}>
+                  <i class="bi bi-suit-heart" id="wlist-icon"></i>Wishlist
+                </button>
+                {% endif %}
+              </div>
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button
+                      class="accordion-button ps-0"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseOne"
+                      aria-expanded="true"
+                      aria-controls="flush-collapseOne"
+                    >
+                     Description
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseOne"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample"
+                  >
+                    <div class="accordion-body">
+                      {{ product.description }}
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingTwo">
+                    <button
+                      class="accordion-button collapsed ps-0"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseTwo"
+                    >
+                      Details & Care
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseTwo"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample"
+                  >
+                    <div class="accordion-body">
+                     <p class="mb-1"><strong>Composition</strong></p>
+                  <span>{{ product.composition }}</span>
+                  <p class="mb-1"><strong>Care Instructions</strong></p>
+                  <ul>
+                    <li>40 degrees machine wash</li>
+                    <li>Do not bleach</li>
+                    <li>Tumble dry normal</li>
+                    <li>Iron medium heat</li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="meta-container">
+                <ul style="list-style-type: none;">
+                    <li>100% Original Products</li>
+                    <li>Free Delivery on order above Rs. 799</li>
+                    <li>Pay on delivery might be available</li>
+                    <li>Easy 30 days returns and exchange</li>
+                </ul>
+              </div>
+              <!-- <div class="description">
+                <div class="desc-header">Description</div>
+                <div class="desc-body">
+                  The Pull-Over Hoodie in grey melange is a regular fit hoodie,
+                  made from a heavy 360GSM cotton mix. The unbrushed loopback
+                  material makes for a durable yet comfortable piece- ideal for
+                  lounging or easy layering. Features ribbed cuffs & hem and a
+                  drawstring hood with toggles.
+                </div>
+              </div>
+              <div class="details-care">
+                <div class="desc-header">Details & Care</div>
+                <div class="desc-body">
+                  <h4>Composition</h4>
+                  <span>65% Cotton 35% Polyester</span>
+                  <h4>Care Instructions</h4>
+                  <ul>
+                    <li>40 degrees machine wash</li>
+                    <li>Do not bleach</li>
+                    <li>Tumble dry normal</li>
+                    <li>Iron medium heat</li>
+                  </ul>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+{% endblock  %}
+
+{% block bottom_scripts %}
+    <!-- <script>
+
+      function screen_resize() {
+        var h = parseInt(window.innerHeight);
+        var w = parseInt(window.innerWidth);
+
+        if(w > 768) {
+            imgzoomutility();
+        }
+    }
+    function imgzoomutility(){
+      var zoomcontainer = document.getElementById('product-details-container');
+      var options1 = {
+          fillContainer: false,
+          width: 400,
+          // height: 500,
+          // zoomWidth: 300,
+          // zoomContainer: zoomcontainer,
+          zoomStyle: 'left:0px;transform: translateX(0%);width:100%;z-index:20;cursor:zoom-in;',
+          offset: {vertical: 0, horizontal: 0}
+      };
+
+      new ImageZoom(document.getElementById("product-img-container"), options1);
+      var pdimg = document.getElementById("product-img");
+      pdimg.style.width = '100%';
+      pdimg.style.height = 'initial';
+    }
+    screen_resize();
+    window.addEventListener('resize', screen_resize);
+    
+    </script> -->
+    <script src="{% static 'js/pdp.js' %}"></script>
+    <script>
+      if(wlist_btn){
+        wlist_btn.addEventListener('click', function(){
+            if(is_loggedin){
+            let uqid = this.getAttribute('data-uqid');
+            wlistProdtoggle(uqid);
+            }
+            else{
+            location.href = "{% url 'accounts:login' %}?next={{request.path}} ";
+            }
+        })
+      }
+    </script>
+ {% endblock %}
