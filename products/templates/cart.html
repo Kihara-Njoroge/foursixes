@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block link %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %} " />
 {% endblock %} {% block title %}
-<title>Slicks|Cart</title>
+<title>Infinity Fashion|Cart</title>
 {% endblock %} {% block content_block %}
 <main>
   {% include 'alert-component.html' %} {% if cart_items %}
@@ -14,7 +14,7 @@
             Items)
           </div>
           <div>
-            Total: ₹<span data-bag-totalprice>{{ cart.total_price }}</span>
+            Total: Kes <span data-bag-totalprice>{{ cart.total_price }}</span>
           </div>
         </div>
         <div class="cart-list">
@@ -80,7 +80,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Bag Total</span
                   ><strong
-                    >₹<span data-bag-totalprice
+                    >Kes <span data-bag-totalprice
                       >{{ cart.total_price }}</span
                     ></strong
                   >
@@ -88,13 +88,13 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Shipping Charges</span
                   ><span
-                    >₹<span id="shipping-cost">{{ shipping_cost }}</span></span
+                    >Kes <span id="shipping-cost">{{ shipping_cost }}</span></span
                   >
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                   <span><strong>Total Amount</strong></span>
                   <strong
-                    >₹<span id="payable_amount"
+                    >Kes <span id="payable_amount"
                       >{{ payable_amount }}</span
                     ></strong
                   >
@@ -103,7 +103,7 @@
             </div>
           </div>
           <form action="{% url 'products:address_page' %}" method="get">
-            <button type="submit" class="btn btn-dark buy-btn" id="place-order">PLACE ORDER</button>
+            <button type="submit" class="btn btn-dark buy-btn" id="place-order">Continue</button>
           </form>
         </div>
       </div>

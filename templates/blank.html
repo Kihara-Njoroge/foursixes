@@ -3,11 +3,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="{% static 'img/favicon-round.png' %}"
-    />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -16,6 +11,7 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <link href="http://fonts.cdnfonts.com/css/fashion" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
@@ -38,12 +34,10 @@
       <nav>
         <div class="nav-container justify-content-center">
           <div class="nav-logo">
-              <img
-                src="{% static 'img/logo1.png' %}"
-                alt="slicks"
-                class="logo"
-              />
-              <span class="nav-brand-name d-inline">Slicks</span>
+              <h1 style="font-family: 'Fashion', sans-serif; font-weight: bold; color: hotpink;display: flex;">
+                InfinityFashion
+                
+             </h1>
             </div>
         </div>
       </nav>
@@ -60,4 +54,5 @@
     ></script>
     {% block bottom_scripts %}{% endblock %}
   </body>
+
 </html>

@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class OrdersAdmin(admin.ModelAdmin):
     list_display = ('user', 'total_price', 'total_quant',  'payment_status',
-                    'status', 'ordered_at', 'razorpay_order_id')
+                    'status', 'ordered_at',)
 
 
 class OrderItemsAdmin(admin.ModelAdmin):

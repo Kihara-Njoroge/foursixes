@@ -240,9 +240,6 @@ def updatequant(request):
     return HttpResponseBadRequest()
 
 
-razorpay_client = razorpay.Client(
-    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
-
 
 def testurl(request):
     # print(get_current_site(request))
@@ -288,21 +285,12 @@ def checkout(request):
                     order=order, product=item.product, size=item.size, quant=item.quant, item_price=item.product.price)
         else:
             return redirect('products:cart')
-        # callback_url = 'http://'+ str(get_current_site(request))+"checkout/paymenthandler/"
-        callback_url = "paymenthandler/"        
-        currency = 'INR'
+        
 
-        razorpay_order = razorpay_client.order.create(dict(amount=order_total_price*100, currency=currency,  receipt=str(order.id), payment_capture='0'))
-        # print(razorpay_order['id'])
-        order.razorpay_order_id = razorpay_order['id']
+
         order.save()
-        razorpay_merchant_key = settings.RAZOR_KEY_ID
         context = {}
-        context['razorpay_merchant_key'] = razorpay_merchant_key
-        context['razorpay_amount'] = order_total_price*100
-        context['currency'] = currency
-        context['razorpay_order_id'] = razorpay_order['id']
-        context['callback_url'] = callback_url
+
         # bag_total is price without shipping
         context['bag_total'] = cart.total_price
         context['shipping_cost'] = shipping_cost
@@ -313,56 +301,3 @@ def checkout(request):
         return redirect('products:cart')
 
 
-@csrf_exempt
-def paymenthandler(request):
-    if request.method == "POST":
-        try:
-            payment_id = request.POST.get('razorpay_payment_id', '')
-            razorpay_order_id = request.POST.get('razorpay_order_id', '')
-            signature = request.POST.get('razorpay_signature', '')
-            params_dict = {
-                'razorpay_order_id': razorpay_order_id,
-                'razorpay_payment_id': payment_id,
-                'razorpay_signature': signature
-            }
-            try:
-                order = Order.objects.get(razorpay_order_id=razorpay_order_id)
-            except:
-                return HttpResponseBadRequest()
-            order.razorpay_payment_id = payment_id
-            order.razorpay_signature = signature
-            order.save()
-            result = razorpay_client.utility.verify_payment_signature(params_dict)
-            if result is None:
-                amount = order.total_price * 100  # we have to pass in paisa
-                try:
-                    razorpay_client.payment.capture(payment_id, amount)
-                    order.payment_status = 2 #success
-                    order.save()
-                    ordering_user = order.user
-                    email_subj  = 'Celebrations! {} your order payment was successful'.format(ordering_user.first_name)
-                    email_msg = '''
-                        Your payment of {} was received successfully.
-                        Your ORDER-ID is {}. You can use it for future refrence. 
-                    '''.format(order.total_price, order.id)
-                    send_mail(
-                        subject=email_subj,
-                        message=email_msg,
-                        from_email=None,
-                        recipient_list=[ordering_user.email],
-                        fail_silently=True,
-                    )
-                    cart = ordering_user.cart.first()
-                    # delete current cart item.
-                    cart.delete()
-                    return render(request, 'paymentsuccess.html')
-                except:
-                    order.payment_status = 3  # failed
-                    order.save()
-                    return render(request, 'paymentfail.html')
-               
-            else:
-                return render(request, 'paymentfail.html')
-        except:
-            return HttpResponseBadRequest()
-    return HttpResponseBadRequest()

@@ -175,11 +175,6 @@ class Order(models.Model):
     ordered_at = models.DateTimeField(auto_now_add=True)
 
     # related to razorpay
-    razorpay_order_id = models.CharField(max_length=500, null=True, blank=True)
-    razorpay_payment_id = models.CharField(
-        max_length=500, null=True, blank=True)
-    razorpay_signature = models.CharField(
-        max_length=500, null=True, blank=True)
 
     def __str__(self):
         return 'Order No. ' + str(self.id)
@@ -198,8 +193,13 @@ class OrderItem(models.Model):
     # ordering price for 1 quantity...if price of product changes in future
     item_price = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.product.name
+
     class Meta:
         unique_together = ["order", "product", "size"]
+
+    
 
 
 class Cart(models.Model):
@@ -237,6 +237,9 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     size = models.CharField(max_length=5, choices=Product.size_choices,default='XSM')
     quant = models.PositiveSmallIntegerField(null=True)
+
+    def __str__(self):
+        return self.product.name
 
     class Meta:
         unique_together = ["cart", "product", "size"]
