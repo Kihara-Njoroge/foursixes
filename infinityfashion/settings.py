@@ -87,12 +87,18 @@ WSGI_APPLICATION = 'infinityfashion.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'infinity-fashion-db',
+         'HOST': 'localhost',
+         'PORT': '5432',
+         'USER': 'postgres',
+         'PASSWORD': 'epetet1298'
+     }
+ }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -153,6 +159,7 @@ CLOUDINARY_STORAGE = {
     'API_KEY': "654456289735851",
     'API_SECRET': "vyXEG_EJ2g0DyrsL_edl3slbHyE"
 }
+
 
 # smtp configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
