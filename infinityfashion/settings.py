@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import django_heroku
 from pathlib import Path
 import os
-
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +29,9 @@ SECRET_KEY = 'django-insecure-eye!!u=1pggnj100)n&a_6ptx-ld$nu@fko22s*-9jp4dg751)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhst',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
+
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
 
 
 # Application definition
@@ -98,6 +100,9 @@ DATABASES = {
          'PASSWORD': 'epetet1298'
      }
  }
+
+
+DATABASES = {'default': dj_database_url.config(default="postgres://wuiekwflqpnlte:b719693dbcdb061c5b4021ec0e51344e7c0f04422763a81206e49690d64044af@ec2-52-200-68-5.compute-1.amazonaws.com:5432/deb7hg72u72t7k")}
 
 
 # Password validation
