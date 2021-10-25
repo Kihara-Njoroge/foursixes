@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import django_heroku
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +30,7 @@ SECRET_KEY = 'django-insecure-eye!!u=1pggnj100)n&a_6ptx-ld$nu@fko22s*-9jp4dg751)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhst',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
 
 
 # Application definition
@@ -89,10 +91,9 @@ WSGI_APPLICATION = 'infinityfashion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -161,6 +162,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kiharajoseph72@gmail.com'
 EMAIL_HOST_PASSWORD = 'babuuh12'
+
+django_heroku.settings(locals())
 
 LOGGING = {
     'version': 1,

@@ -1,18 +1,8 @@
 import os
-from faker import Faker
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
 from accounts.models import Address
-
-fake = Faker(['en-US', 'en_US', 'en_US', 'en-US'])
-Faker.seed(0)
-
-
-def get_fake_description():
-    word_list = ['fit', 'breathable', 'sleek', 'cotton', 'sleeve', 'round', 'printed', 'is', 'slim', 'regular', 'look', 'Give your wardrobe a quick upgrade with this classy',
-                 'stripes', 'comfort', 'classic', 'a', 'the', 'and', 'made from', 'hue', 'clothing', 'fabric']
-    return fake.paragraph(nb_sentences=6, ext_word_list=word_list)
 
 
 def get_sentinel_user():
@@ -188,7 +178,6 @@ class Order(models.Model):
         blank=True, choices=order_status_choices, default=waitingconfirmation)
     ordered_at = models.DateTimeField(auto_now_add=True)
 
-    # related to razorpay
 
     def __str__(self):
         return 'Order No. ' + str(self.id)
