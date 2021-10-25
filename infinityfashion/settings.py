@@ -13,6 +13,10 @@ import django_heroku
 from pathlib import Path
 import os
 import dj_database_url
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5654908922d7310265a434ff50da595aa43c706c
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -98,12 +102,12 @@ DATABASES = {
          'PORT': '5432',
          'USER': 'postgres',
          'PASSWORD': 'epetet1298'
+         
      }
  }
 
 
 DATABASES = {'default': dj_database_url.config(default="postgres://wuiekwflqpnlte:b719693dbcdb061c5b4021ec0e51344e7c0f04422763a81206e49690d64044af@ec2-52-200-68-5.compute-1.amazonaws.com:5432/deb7hg72u72t7k")}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
