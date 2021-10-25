@@ -7,7 +7,7 @@ chardet==4.0.0
 cloudinary==1.25.0
 cryptography==3.4.6
 defusedxml==0.7.1
-dj-database-url==0.5.0
+dj-database-url==0.5.0cl
 Django>=3.1.8
 django-allauth==0.44.0
 django-cloudinary-storage==0.3.0
