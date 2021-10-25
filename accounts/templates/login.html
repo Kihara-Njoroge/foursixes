@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% load static %} {% block link %}
+<link rel="stylesheet" href='{% static "css/login.css" %}' />
+<link href="http://fonts.cdnfonts.com/css/fashion" rel="stylesheet">
+{% endblock %} {% block title %}
+<title>Infinity Fashion | Signin</title>
+{% endblock %} {% block content_block %}
+<main class="center-div" style="min-height: 80vh; padding: 10px 0">
+  <div class="reg-container">
+    <h1 style="font-family: 'Fashion', sans-serif; font-weight: bold; color: hotpink;display: flex;">
+      InfinityFashion
+      
+   </h1>
+    <div class="reg-links">
+      {% block reglink %}
+      <div>   
+        <a href="{% url 'accounts:login' %}" class="reg-link link-active"
+          >SIGN IN</a
+        >
+        <a href="{% url 'accounts:signup' %}">SIGN UP</a>
+      </div>
+      {% endblock %}
+      <div>
+        <a style="cursor: pointer" id="resetformbtn">RESET</a>
+      </div>
+    </div>
+    <div class="reg-form-container">
+      {% block registration_form %}
+      <form method="POST" class="reg-form" id="reg-form">
+        {% csrf_token %} {% if form.errors %}
+        <div
+          class="alert alert-light text-danger alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Username and Password did not match !</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endif %} {% comment %}
+  
+        {% endcomment %}
+        {% render_field form.email class="reg-ip" id="email" placeholder="Email"%}
+        {% render_field form.password id="password" class="reg-ip" placeholder="Password"%}
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        <button type="submit" class="btn btn-dark reg-btn">Sign in</button>
+      </form>
+      {% endblock %}
+    </div>
+  </div>
+</main>
+
+{% endblock %} {% block bottom_scripts %}
+<script>
+  let resetformbtn = document.getElementById("resetformbtn");
+  let regform = document.getElementById("reg-form");
+  resetformbtn.addEventListener("click", function () {
+    regform.reset();
+  });
+</script>
+{% endblock %}
