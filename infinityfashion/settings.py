@@ -26,9 +26,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SECRET_KEY = 'django-insecure-eye!!u=1pggnj100)n&a_6ptx-ld$nu@fko22s*-9jp4dg751)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['infinityfashion.store','infinityfashion.herokuapp.com','127.0.0.1',]
 
 
 # Application definition
