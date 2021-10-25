@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import django_heroku
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +29,7 @@ SECRET_KEY = 'django-insecure-eye!!u=1pggnj100)n&a_6ptx-ld$nu@fko22s*-9jp4dg751)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
 
@@ -86,12 +89,17 @@ WSGI_APPLICATION = 'infinityfashion.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-    }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'infinity-fashion-db',
+         'HOST': 'localhost',
+         'PORT': '5432',
+         'USER': 'postgres',
+         'PASSWORD': 'epetet1298'
+     }
+ }
 
 
 # Password validation
@@ -154,6 +162,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': "vyXEG_EJ2g0DyrsL_edl3slbHyE"
 }
 
+
 # smtp configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -161,6 +170,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kiharajoseph72@gmail.com'
 EMAIL_HOST_PASSWORD = 'babuuh12'
+
+django_heroku.settings(locals())
 
 LOGGING = {
     'version': 1,
