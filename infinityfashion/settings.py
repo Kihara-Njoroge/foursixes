@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-eye!!u=1pggnj100)n&a_6ptx-ld$nu@fko22s*-9jp4dg751)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['infinityfashion.herokuapp.com', 'infinityfashion.store', '127.0.0.1',]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhst',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
 
 
 # Application definition
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'infinityfashion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3'
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -154,6 +154,13 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': "vyXEG_EJ2g0DyrsL_edl3slbHyE"
 }
 
+# smtp configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kiharajoseph72@gmail.com'
+EMAIL_HOST_PASSWORD = 'babuuh12'
 
 LOGGING = {
     'version': 1,
