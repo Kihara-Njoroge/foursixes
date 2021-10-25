@@ -42,10 +42,16 @@ class Product(models.Model):
     shorts = 9
     trackpants = 10
     trousers = 11
+    watches = 12
+    bags = 13
+    lingerie = 14
+    heels = 15
+    sneakers = 16
+    boots =17
+    sandals = 18
 
 
     clothing_categories = [
-        # (name saved in database, human readable)
         (shirts, 'Shirts'),
         (tshirts, 'Tshirts'),
         (sweatshirts, 'Sweatshirts'),
@@ -57,21 +63,27 @@ class Product(models.Model):
         (shorts, 'Shorts'),
         (trackpants, 'Track Pants'),
         (trousers, 'Trousers'),
-
+        (heels, 'Heels'),
+        (sneakers, 'Sneaker'),
+        (boots, 'Boots'),
+        (sandals, 'Sandals'),
+        (watches, 'Watches'),
+        (bags, 'Bags'),
+        (lingerie, 'lingerie')
 
     ]
 
     clothing_brands = [
-        ('network', 'Network'),
-        ('mufti', 'Mufti'),
-        ('anthem', 'Anthem'),
-        ('blue saint', 'Blue Saint'),
-        ('dennis lingo', 'Dennis Lingo'),
-        ('balista', 'Balista'),
-        ('hue', 'Hue'),
-        ('harbour', 'Harbour'),
-        ('flyrs', 'Flyrs'),
-        ('up', 'UP')
+        ('nike', 'Nike'),
+        ('fendi', 'Fendi'),
+        ('zara', 'Zara'),
+        ('dior', 'Dior'),
+        ('versace', 'Versace'),
+        ('chanel', 'Chanel'),
+        ('prada', 'Prada'),
+        ('louis vuitton', 'Louis Vuitton'),
+        ('adidas', 'Adidas'),
+        ('burberry', 'Burberry')
     ]
 
     type_choices = [
@@ -79,20 +91,22 @@ class Product(models.Model):
         ('watches', 'watches'),
         ('shoes', 'shoes'),
         ('lingerie','lingerie'),
-        ('beauty', 'beauty')
+        ('bags', 'bags')
     ]
     size_xsm = 'xsm'
     size_sm = 'sm'
     size_m = 'm'
     size_l = 'l'
     size_xl = 'xl'
+    size_xxl = 'xxl'
 
     size_choices = [
-        (size_xsm, 'XSM'),
-        (size_sm, 'S'),
-        (size_m, 'M'),
-        (size_l, 'L'),
-        (size_xl, 'XL')
+        (size_xsm, 'XSM/36'),
+        (size_sm, 'S/37'),
+        (size_m, 'M/38'),
+        (size_l, 'L/39'),
+        (size_xl, 'XL/40'),
+        (size_xxl, 'XXL/41')
     ]
 
     # uqid is uuid for products
@@ -193,8 +207,6 @@ class OrderItem(models.Model):
     # ordering price for 1 quantity...if price of product changes in future
     item_price = models.PositiveIntegerField()
 
-    def __str__(self):
-        return self.product.name
 
     class Meta:
         unique_together = ["order", "product", "size"]

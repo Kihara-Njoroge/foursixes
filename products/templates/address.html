@@ -16,7 +16,7 @@
     <div class="row justify-content-around">
     <div class="col-12 col-md-6">
         <div class="cp-items-total">
-            Specify shipping details
+            Delivery Info
         </div>
         <div class="row g-3">
             <div class="col-md-6">
@@ -28,20 +28,20 @@
                 <input type="text" class="form-control" id="lname" value="{{ user.last_name }}" disabled>
             </div>
             <div class="col-12">
-                <label for="inputAddress" class="form-label">Address</label>
-                {% render_field form.address class='form-control' id="inputAddress" %}
+                <label for="inputAddress" class="form-label">Phone No.</label>
+                {% render_field form.phone_no class='form-control' id="inputAddress" %}
             </div>
             <div class="col-md-5">
-                <label for="inputCity" class="form-label">City</label>
-                {% render_field form.city class='form-control' id="inputCity"%}
+                <label for="inputCity" class="form-label">Town</label>
+                {% render_field form.town class='form-control' id="inputCity"%}
             </div>
             <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                {% render_field form.state class='form-control' id="inputState"%}
+                <label for="inputState" class="form-label">Estate/Apartment</label>
+                {% render_field form.estate class='form-control' id="inputState"%}
             </div>
             <div class="col-md-3">
-                <label for="inputZip" class="form-label">Zip</label>
-                {% render_field form.zipcode class='form-control' id="inputZip"%}
+                <label for="inputZip" class="form-label">Hse/Apt No.</label>
+                {% render_field form.apartment class='form-control' id="inputZip"%}
             </div>
             <div class="col-12">
                 <div class="form-check">
@@ -72,7 +72,7 @@
                 >
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                <span>Shipping Charges</span
+                <span>Delivery Fees</span
                 ><span
                     >Kes <span id="shipping-cost">{{ shipping_cost }}</span></span
                 >

@@ -1,4 +1,4 @@
-import razorpay
+from django.core import paginator
 from django.shortcuts import render, get_object_or_404, Http404, HttpResponse, redirect
 from django.forms.models import model_to_dict
 from django.contrib.sites.shortcuts import get_current_site
@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from django.db.models import Q
 from django.conf import settings
+from django.core.paginator import Paginator
 from django.core import serializers
 from django.http import JsonResponse, HttpResponseBadRequest
 from accounts.forms import AddressCreationForm
@@ -16,15 +17,23 @@ from .utils import get_or_set_cart_session
 
 
 def calculateshipping(total_price):
-    shipping_cost = 0
-    if total_price < 800:
-        shipping_cost = 50
+    if total_price > 5000:
+        shipping_cost = 0
+    else:
+        shipping_cost = 200
     amount_payable = total_price + shipping_cost
     return amount_payable, shipping_cost
 
 
 def index(request):
-    return render(request, 'index.html')
+    pdlist = Product.objects.all()
+    # filtering
+    pdlist = apply_filters(pdlist,request)
+    paginator = Paginator(pdlist, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    title = 'Infinity Fashion | ' + "ALL"
+    return render(request, 'pdlist.html', context={'pdlist': pdlist, 'page_obj':page_obj, 'title': title})
 
 
 def apply_filters(pdlist, request):
@@ -51,36 +60,34 @@ def shopgender(request, type):
         pdlist = Product.objects.filter(type='shoes')
     elif type == 'lingerie':
         pdlist = Product.objects.filter(type='lingerie')
-    elif type == 'beauty':
-        pdlist = Product.objects.filter(type='beauty')
+    elif type == 'bags':
+        pdlist = Product.objects.filter(type='bags')
     else:
         raise Http404("Page not found :(")
 
     # filtering
     pdlist = apply_filters(pdlist,request)
+    paginator = Paginator(pdlist,20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     title = 'Infinity Fashion | ' + type
-    return render(request, 'pdlist.html', context={'pdlist': pdlist, 'title': title})
+    return render(request, 'pdlist.html', context={'pdlist': pdlist, 'page_obj':page_obj, 'title': title})
 
 
 def search(request):
     if request.method == 'GET':
         # q = search term
-        q = request.GET.get('q','')
-        q = q.lower().strip()
+        query = request.GET.get('q','')
+        query = query.lower().strip()
         pdlist = Product.objects.all()
-        if q :
-            terms = q.split()
-            for term in terms:
-                if term in ['clothes', 'suits', 'jeans']:
-                    fltr = Product.objects.filter(type='clothes')
-                elif term in ['watches', 'accessorie','time']:
-                    fltr = Product.objects.filter(type='watches')
-                else:
-                    fltr = Product.objects.filter(Q(name__icontains=term + ' ') | Q(name__icontains=' ' +term))
-                pdlist = pdlist & fltr
+        fltr = Product.objects.filter(Q(name__icontains=query) | Q(type__icontains=query))
+        pdlist = pdlist & fltr
         pdlist = apply_filters(pdlist, request) 
+        paginator = Paginator(pdlist,20)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         title = 'Search'
-        return render(request, 'pdlist.html', context={'pdlist': pdlist, 'title': title})
+        return render(request, 'pdlist.html', context={'pdlist': pdlist, 'page_obj':page_obj, 'title': title})
 
 
 
@@ -114,7 +121,7 @@ def cart(request):
     # return JsonResponse({'action': 'done'}, status=400)
 
 
-@login_required
+@login_required(login_url='accounts:login')
 def wishlist(request):
     # items = json.loads(serializers.serialize("json", request.user.wlist.all()))
     # print(items, type(items))
@@ -123,7 +130,7 @@ def wishlist(request):
 
     return render(request, 'wishlist.html', context={'pdlist': items})
 
-
+@login_required(login_url='accounts:login')
 def wishlist_add_remove_product(request):
     is_success = False
     status = 400
@@ -246,7 +253,7 @@ def testurl(request):
     # return render(request, 'paymentsuccess.html')
     return HttpResponse("DONE")
 
-@login_required
+@login_required(login_url='accounts:login')
 def addresspage(request):
     if request.method == "GET":
         cart = get_or_set_cart_session(request)
@@ -259,8 +266,7 @@ def addresspage(request):
                'shipping_cost': shipping_cost, 'payable_amount': total_payable_price, 'form':form}
         return render(request, 'address.html', context=context)
         
-
-@login_required
+@login_required(login_url='accounts:login')
 def checkout(request):
     if request.method == "POST":
         user = request.user

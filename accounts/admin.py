@@ -6,8 +6,8 @@ from .models import User, Address
 
 
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ('user', 'city', 'state',
-                    'zipcode', 'primary', 'address')
+    list_display = ('user', 'phone_no', 'town',
+                    'estate', 'apartment', 'primary')
 
 
 admin.site.register(User, UserAdmin)

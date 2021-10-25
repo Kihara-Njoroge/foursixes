@@ -9,12 +9,12 @@
       <div class="sa-container">
         <h3 class="sa-card-header">Order Summary</h3>
         <div class="sa-card">
-          <h3 class="sa-card-subheader">Shipping Address</h3>
+          <h3 class="sa-card-subheader">Delivery Info</h3>
           <div class="sa-address">{{ address.address }}</div>
-          <div class="sa-misc">
-            <div class="sa-misc-info"><strong>State: </strong><span>{{ address.state }}</span></div>
-            <div class="sa-misc-info"><strong>City: </strong><span>{{ address.city }}</span></div>
-            <div class="sa-misc-info"><strong>ZipCode: </strong><span>{{ address.zipcode }}</span></div>
+          <div class="sa-misc" style="display: flex; flex-direction: column;">
+            <div class="sa-misc-info"><strong>Town: </strong><span>{{ address.town }}</span></div>
+            <div class="sa-misc-info"><strong>Estate/Apt: </strong><span>{{ address.estate }}</span></div>
+            <div class="sa-misc-info"><strong>Hse/Apt No: </strong><span >{{ address.apartment }}</span></div>
           </div>
         </div>
         <div class="bill-card">
@@ -28,7 +28,7 @@
                 <span>Bag Total</span><strong>Kes <span data-bag-totalprice> {{ bag_total }} </span></strong>
               </li>
               <li class="list-group-item d-flex justify-content-between">
-                <span>Shipping Charges</span><span>Kes <span id="shipping-cost">{{ shipping_cost }}</span></span>
+                <span>Delivery Fees</span><span>Kes <span id="shipping-cost">{{ shipping_cost }}</span></span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span><strong>Total Amount</strong></span>

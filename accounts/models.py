@@ -16,6 +16,7 @@ def phone_validator(phno):
 
 class User(AbstractCUser):
     phno = models.CharField(null=True, max_length=10, validators=[phone_validator])
+    
     # users address related name = addresses
     # users wishlist related name = wlist
     # users cart related name = cart
@@ -38,9 +39,9 @@ class Address(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='addresses', null=True)
     # ig django stores model name in lower case so address field might clash ..not sure
-    address = models.CharField(max_length=250, null=False)
-    city = models.CharField(max_length=50, null=False)
-    state = models.CharField(max_length=50, null=False)
-    zipcode = models.CharField(max_length=50, null=False)
+    phone_no = models.CharField(max_length=250, null=False)
+    town = models.CharField(max_length=50, null=False)
+    estate = models.CharField(max_length=50, null=False)
+    apartment = models.CharField(max_length=50, null=False)
     # primary field used to store the primaty/default address of user
     primary = models.BooleanField(blank=True, default=False)

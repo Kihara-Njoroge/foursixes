@@ -40,9 +40,9 @@ def signup(request):
             # user.first_name = form.cleaned_data.get('first_name')
             # user.last_name = form.cleaned_data.get('last_name')
             user.save()
-            email_msg = 'Hey {}, thanks for signing up. Have a look around at our store because we sell slick clothing that make YOU Slick!'.format(user.first_name)
+            email_msg = 'Hey {}, thanks for signing up. Enjoy Latest collection from our shop.'.format(user.first_name)
             send_mail(
-                subject='Welcome to Slicks Store!',
+                subject='Welcome to Infinity Fashion Kenya!',
                 message=email_msg,
                 from_email=None,
                 recipient_list=[user.email],
