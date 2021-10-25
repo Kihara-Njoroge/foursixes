@@ -17,10 +17,7 @@ from .utils import get_or_set_cart_session
 
 
 def calculateshipping(total_price):
-    if total_price > 5000:
-        shipping_cost = 0
-    else:
-        shipping_cost = 200
+    shipping_cost = 0
     amount_payable = total_price + shipping_cost
     return amount_payable, shipping_cost
 

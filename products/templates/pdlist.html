@@ -184,7 +184,7 @@
           {% for product in page_obj %}
           <div class="col col-6 col-sm-6 col-md-4 col-xl-3">
             <div class="product">
-              <a href=" {% url 'products:shop_product' uqid=product.uqid %} " target="_blank">
+              <a href=" {% url 'products:shop_product' uqid=product.uqid %} ">
                 <div class="product-img">
                   <img src="{{ product.img1.url }}" alt="{{ product.name }}">
                 </div>

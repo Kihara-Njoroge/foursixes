@@ -208,6 +208,7 @@ class OrderItem(models.Model):
     item_price = models.PositiveIntegerField()
 
 
+
     class Meta:
         unique_together = ["order", "product", "size"]
 
@@ -216,7 +217,7 @@ class OrderItem(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name='cart', null=True)
+        get_user_model(),blank=True, on_delete=models.CASCADE, related_name='cart', null=True)
 
     total_quant = models.PositiveIntegerField(default=0)
     total_price = models.PositiveIntegerField(default=0)

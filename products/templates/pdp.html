@@ -30,16 +30,39 @@
                 <div class="pd-price">Kes. {{ product.price }}</div>
                 <small class="text-success">inclusive of all taxes</small>
               </div>
-
+              {% if product.type == 'clothes' %}
               <div class="pd-size-container">
-                <div class="pd-size center-div" data-size='xsm'><small>XSM/36</small></div>
-                <div class="pd-size center-div" data-size='sm'><small>S/37</small></div>
-                <div class="pd-size center-div" data-size='m'><small>M/38</small></div>
-                <div class="pd-size center-div" data-size='l'><small>L/39</small></div>
-                <div class="pd-size center-div" data-size='xl'><small>XL/40</small></div>
-                <div class="pd-size center-div" data-size='xxl'><small>XXL/41</small></div>
+                <div class="pd-size center-div" data-size='xsm'><small>XSM</small></div>
+                <div class="pd-size center-div" data-size='sm'><small>S</small></div>
+                <div class="pd-size center-div" data-size='m'><small>M</small></div>
+                <div class="pd-size center-div" data-size='l'><small>L</small></div>
+                <div class="pd-size center-div" data-size='xl'><small>XL</small></div>
+                <div class="pd-size center-div" data-size='xxl'><small>XXL</small></div>
               </div>
-              <small class="text-watning">NB:Number For shoes and the letters for clothing sizes</small>
+              {% elif product.type == 'lingerie' %}
+              <div class="pd-size-container">
+                <div class="pd-size center-div" data-size='xsm'><small>XSM</small></div>
+                <div class="pd-size center-div" data-size='sm'><small>S</small></div>
+                <div class="pd-size center-div" data-size='m'><small>M</small></div>
+                <div class="pd-size center-div" data-size='l'><small>L</small></div>
+                <div class="pd-size center-div" data-size='xl'><small>XL</small></div>
+                <div class="pd-size center-div" data-size='xxl'><small>XXL</small></div>
+              </div>
+              {% elif product.type == 'shoes'%}
+              <div class="pd-size-container">
+                <div class="pd-size center-div" data-size='xsm'><small>36</small></div>
+                <div class="pd-size center-div" data-size='sm'><small>37</small></div>
+                <div class="pd-size center-div" data-size='m'><small>38</small></div>
+                <div class="pd-size center-div" data-size='l'><small>39</small></div>
+                <div class="pd-size center-div" data-size='xl'><small>40</small></div>
+                <div class="pd-size center-div" data-size='xxl'><small>41</small></div>
+              </div>
+              {% else %}
+              <div class="pd-size-container">
+                <div class="pd-size center-div active" data-size='m'><small>One Size</small></div>
+              </div>
+              {% endif %}
+          
               <div class="text-danger d-none" id="size-alert"><small>Please select a size.</small></div>
               <div class="pd-quant-container">
                 <label for="pd-quant">Qty: </label>
@@ -126,9 +149,8 @@
               <div class="meta-container">
                 <ul style="list-style-type: none;">
                     <li>100% Original Products</li>
-                    <li>Free Delivery on order above kes. 5000</li>
+                    <li>Free Delivery</li>
                     <li>Pay on delivery</li>
-                    <li>Easy 30 days returns and exchange</li>
                 </ul>
               </div>
               <!-- <div class="description">
