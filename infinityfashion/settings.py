@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import django_heroku
 from pathlib import Path
 import os
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -100,6 +101,9 @@ DATABASES = {
          'PASSWORD': 'epetet1298'
      }
  }
+
+DATABASES = {'default': dj_database_url.config(default="postgres://wuiekwflqpnlte:b719693dbcdb061c5b4021ec0e51344e7c0f04422763a81206e49690d64044af@ec2-52-200-68-5.compute-1.amazonaws.com:5432/deb7hg72u72t7k")}
+
 
 
 # Password validation
