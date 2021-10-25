@@ -1,0 +1,138 @@
+.reg-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5%;
+  min-height: 500px;
+  width: 50%;
+  min-width: 300px;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 20px 5px rgb(0 0 0 / 25%);
+}
+
+.reg-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  color: rgba(11, 10, 20, 0.5);
+}
+
+.reg-link {
+  margin-right: 5px;
+}
+.link-active {
+  color: rgba(11, 10, 20, 1);
+}
+
+.reg-form-container {
+  width: 100%;
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  padding: 15px 0px;
+}
+
+#first_name{
+  align-self: flex-start;
+  width: 47%;
+  display: inline;
+}
+
+#last_name{
+  align-self: flex-end;
+  width: 47%;
+  display: inline;
+  margin-left: auto;
+}
+
+.reg-ip {
+  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 2% 4%;
+  padding: 0.485rem 0.75rem;
+  outline: none;
+  border: none;
+  background-color: #f2f2f2;
+}
+
+.reg-btn {
+  box-shadow: 0px 5px 15px rgb(0 0 0 / 40%);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.or-section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  color: #ccc;
+}
+.line {
+  border-top: 1px solid #ccc;
+  width: 100%;
+}
+
+.social-login-btn {
+  position: relative;
+  width: 100%;
+}
+
+.social-login {
+  padding: 15px 0px;
+}
+
+.social-btn.google {
+  background-color: #5b90f0;
+  border-color: #5b90f0;
+  color: #fff;
+}
+
+.social-btn.twitter {
+  background-color: #03a9f4;
+  border-color: #03a9f4;
+  color: #fff;
+  margin-bottom: 0px;
+}
+.social-btn img {
+  position: absolute;
+  width: 35px;
+  left: 5px;
+  top: 2px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.validators {
+  display: none;
+}
+
+.errorlist{
+  color: #dc3545;
+}
+
+.reg-container ul{
+  list-style-position: inside;
+  padding-left: 1rem;
+}
+
+.validators ul {
+  list-style-position: inside;
+  padding-left: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .reg-container {
+    padding: 3% 2%;
+  }
+}
