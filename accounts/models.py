@@ -38,7 +38,8 @@ class Address(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='addresses', null=True)
-    # ig django stores model name in lower case so address field might clash ..not sure
+    # ig django stores model name in lower case so address field might clash ..not sure\
+    name = models.CharField(max_length=250, null=False)
     phone_no = models.CharField(max_length=250, null=False)
     town = models.CharField(max_length=50, null=False)
     estate = models.CharField(max_length=50, null=False)

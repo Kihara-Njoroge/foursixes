@@ -153,30 +153,6 @@
                     <li>Pay on delivery</li>
                 </ul>
               </div>
-              <!-- <div class="description">
-                <div class="desc-header">Description</div>
-                <div class="desc-body">
-                  The Pull-Over Hoodie in grey melange is a regular fit hoodie,
-                  made from a heavy 360GSM cotton mix. The unbrushed loopback
-                  material makes for a durable yet comfortable piece- ideal for
-                  lounging or easy layering. Features ribbed cuffs & hem and a
-                  drawstring hood with toggles.
-                </div>
-              </div>
-              <div class="details-care">
-                <div class="desc-header">Details & Care</div>
-                <div class="desc-body">
-                  <h4>Composition</h4>
-                  <span>65% Cotton 35% Polyester</span>
-                  <h4>Care Instructions</h4>
-                  <ul>
-                    <li>40 degrees machine wash</li>
-                    <li>Do not bleach</li>
-                    <li>Tumble dry normal</li>
-                    <li>Iron medium heat</li>
-                  </ul>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -185,37 +161,6 @@
 {% endblock  %}
 
 {% block bottom_scripts %}
-    <!-- <script>
-
-      function screen_resize() {
-        var h = parseInt(window.innerHeight);
-        var w = parseInt(window.innerWidth);
-
-        if(w > 768) {
-            imgzoomutility();
-        }
-    }
-    function imgzoomutility(){
-      var zoomcontainer = document.getElementById('product-details-container');
-      var options1 = {
-          fillContainer: false,
-          width: 400,
-          // height: 500,
-          // zoomWidth: 300,
-          // zoomContainer: zoomcontainer,
-          zoomStyle: 'left:0px;transform: translateX(0%);width:100%;z-index:20;cursor:zoom-in;',
-          offset: {vertical: 0, horizontal: 0}
-      };
-
-      new ImageZoom(document.getElementById("product-img-container"), options1);
-      var pdimg = document.getElementById("product-img");
-      pdimg.style.width = '100%';
-      pdimg.style.height = 'initial';
-    }
-    screen_resize();
-    window.addEventListener('resize', screen_resize);
-    
-    </script> -->
     <script src="{% static 'js/pdp.js' %}"></script>
     <script>
       if(wlist_btn){

@@ -13,7 +13,7 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from accounts.forms import AddressCreationForm
 import json
 from . models import Product, Wishlist, Cart, CartItem, Order, OrderItem
-from .utils import get_or_set_cart_session
+from .utils import *
 
 
 def calculateshipping(total_price):
@@ -23,7 +23,7 @@ def calculateshipping(total_price):
 
 
 def index(request):
-    pdlist = Product.objects.all()
+    pdlist = Product.objects.all().order_by('?')
     # filtering
     pdlist = apply_filters(pdlist,request)
     paginator = Paginator(pdlist, 20)
@@ -50,15 +50,15 @@ def apply_filters(pdlist, request):
 def shopgender(request, type):
     type = type.lower()
     if type == 'clothes':
-        pdlist = Product.objects.filter(type='clothes')
+        pdlist = Product.objects.filter(type='clothes').order_by('?')
     elif type == 'watches':
-        pdlist = Product.objects.filter(type='watches')
+        pdlist = Product.objects.filter(type='watches').order_by('?')
     elif type == 'shoes':
-        pdlist = Product.objects.filter(type='shoes')
+        pdlist = Product.objects.filter(type='shoes').order_by('?')
     elif type == 'lingerie':
-        pdlist = Product.objects.filter(type='lingerie')
+        pdlist = Product.objects.filter(type='lingerie').order_by('?')
     elif type == 'bags':
-        pdlist = Product.objects.filter(type='bags')
+        pdlist = Product.objects.filter(type='bags').order_by('?')
     else:
         raise Http404("Page not found :(")
 
@@ -250,7 +250,7 @@ def testurl(request):
     # return render(request, 'paymentsuccess.html')
     return HttpResponse("DONE")
 
-@login_required(login_url='accounts:login')
+
 def addresspage(request):
     if request.method == "GET":
         cart = get_or_set_cart_session(request)
@@ -263,8 +263,10 @@ def addresspage(request):
                'shipping_cost': shipping_cost, 'payable_amount': total_payable_price, 'form':form}
         return render(request, 'address.html', context=context)
         
-@login_required(login_url='accounts:login')
 def checkout(request):
+    template = get_template('checkout.html')
+    order_item_list = []
+    order_item_dict = {}
     if request.method == "POST":
         user = request.user
         cart = get_or_set_cart_session(request)
@@ -274,14 +276,12 @@ def checkout(request):
             address_form = AddressCreationForm(request.POST)
             if address_form.is_valid():
                 address = address_form.save(commit=False)
-                address.user = request.user
                 address.save()
             else:
                 return redirect('products:cart')
             order_total_price, shipping_cost = calculateshipping(
                 cart.total_price)
-            order = Order.objects.create(
-                user=user, total_price=order_total_price, total_quant=cart.total_quant, shipping_cost=shipping_cost, shipping_address=address)
+            order = Order.objects.create(total_price=order_total_price, total_quant=cart.total_quant, shipping_cost=shipping_cost, shipping_address=address)
             # copy cart items to order items
             for item in cart_items:
                 order_item = OrderItem.objects.create(
@@ -295,12 +295,31 @@ def checkout(request):
         context = {}
 
         # bag_total is price without shipping
-        context['bag_total'] = cart.total_price
-        context['shipping_cost'] = shipping_cost
-        context['address'] = address
-        context['order'] = order
-        return render(request, 'checkout.html', context=context)
-    else:
-        return redirect('products:cart')
+        context={'bag_total': cart.total_price,'shipping_cost':shipping_cost,'address':address,
+                'order':order, 'order_item':order_item, 'cart_items':cart_items}
+
+        html = template.render(context)
+
+        pdf = render_to_pdf('order_pdf.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "order%s.pdf" % (
+                "12341231")
+            content = "inline; filename='%s'" % (filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % (filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
 
 
+@login_required(login_url='accounts:login')
+def myOrders(request):
+  user = request.user
+  orderitems = OrderItem.objects.all()
+  orders = Order.objects.all().filter(user=user)
+
+  context = {'order':orders}
+
+  return render(request, 'orders.html', context)

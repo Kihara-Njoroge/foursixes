@@ -1,4 +1,6 @@
 from django.urls import path
+
+from products.models import Order
 from . import views
 
 app_name = 'products'
@@ -11,7 +13,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('cart/step2/', views.addresspage, name='address_page'),
     path('checkout/', views.checkout, name='checkout'),
-
+    path('orders/', views.myOrders, name='orders'),
     path('testurl/', views.testurl, name='testurl')
 ]
 

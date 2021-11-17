@@ -1,5 +1,21 @@
 from .models import Cart, CartItem
 from django.contrib.auth.signals import user_logged_in
+from io import BytesIO
+import json
+from django.http import HttpResponse
+from django.template.loader import get_template
+from .models import *
+from xhtml2pdf import pisa
+
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
 
 '''
 if user is logged in add items to his cart and not to session cart
@@ -44,6 +60,8 @@ if user's cart does not exist then assign user to session's cart and clear cart_
 '''
 
 # below funtion to be called only upon login
+
+
 
 
 def set_user_cart(sender, user, request, **kwargs):
@@ -95,3 +113,5 @@ def set_user_cart(sender, user, request, **kwargs):
 
 
 user_logged_in.connect(set_user_cart)
+
+

@@ -12,4 +12,4 @@ class UserCreateForm(UserCreationForm):
 class AddressCreationForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ['phone_no', 'town', 'estate', 'apartment', 'primary']
+        fields = ['name','phone_no', 'town', 'estate', 'apartment', 'primary']

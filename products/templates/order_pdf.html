@@ -1,0 +1,185 @@
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="text-left logo p-2 px-5">
+          <h1
+            style="
+              font-family: 'Fashion', sans-serif;
+              font-weight: bold;
+              color: hotpink;
+            "
+          >
+            Infinity Fashion Kenya
+          </h1>
+        </div>
+        <div class="invoice p-5">
+          <h5>
+            Your order Confirmed!
+            <div class="py-2">
+              <span class="d-block text-muted">Order No: </span>
+              <span>{{ order.id }}</span>
+            </div>
+          </h5>
+          <span class="font-weight-bold d-block mt-4"
+            >Hello, <strong>{{ address.name}}</strong></span></br>
+          <span
+            >You order has been confirmed and will be delivered in the next two
+            days!</span
+          >
+          <h3>Delivery Info</h3>
+          <hr>
+          <div
+            class="payment border-top mt-3 mb-3 border-bottom table-responsive"
+          >
+            <table class="table table-borderless">
+                
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted">Order Date: </span>
+                      <span>{{ order.ordered_at }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted">Payment: </span>
+                      <span style="color:blue ;">Cash On Delivery</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2">
+                      <span class="d-block text-muted">Shiping Address:</span>
+                      <span>
+                        {{address.town}} , {{address.estate}},
+                        {{address.apartment}}</span
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+          <h3>Your items</h3>
+          <div class="product border-bottom table-responsive">
+            <table class="table table-borderless">
+              <tbody>
+                {% for item in cart_items %}
+                <tr>
+                  <td>
+                    <img src="{{ item.product.img1.url }}" alt="product" width="90" style="margin-bottom: 5px;"/>
+                  </td>
+                  <td>
+                    <span class="font-weight-bold">{{ item.product.name }}</span>
+                    <div class="product-qty">
+
+                    </div>
+                  </td>
+                  <td >
+                    <div class="text-right">
+                      <span class="font-weight-bold">{{item.product.price }}</span>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody><hr>
+             
+            </table>
+          </div>
+        <hr>
+          <div class="row d-flex justify-content-end">
+            <div class="col-md-5">
+              <table class="table table-borderless">
+                <tbody class="totals">
+                  <tr>
+                    <td>
+                      <div class="text-left">
+                        <span class="text-muted">Subtotal</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-right"><span>kes. {{bag_total}}</span></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="text-left">
+                        <span class="text-muted">Delivery Fee</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-right"><span>kes. {{shipping_cost}}</span></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="text-left">
+                        <span class="text-muted">Tax Fee</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-right"><span>Prices inclusive of VAT</span></div>
+                    </td>
+                  </tr>
+                  <tr class="border-top border-bottom">
+                    <td>
+                      <div class="text-left">
+                        <span class="font-weight-bold">Total</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-right">
+                        <span class="font-weight-bold">kes. {{bag_total|add:shipping_cost}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr>
+          <p>
+            We will be contacting you when the item will be dispatched!
+          </p>
+          <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
+          <span>Infinity Fashion Kenya Team</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    background-color: white;
+    font-family: 'Montserrat', sans-serif
+}
+
+.card {
+    border: none
+}
+
+.logo {
+    background-color: white
+}
+
+.totals tr td {
+    font-size: 13px
+}
+
+.footer {
+    background-color: white
+}
+
+.footer span {
+    font-size: 12px
+}
+
+.product-qty span {
+    font-size: 12px;
+    color: #dedbdb
+}
+</style>

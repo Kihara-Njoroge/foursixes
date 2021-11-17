@@ -1,9 +1,10 @@
-{% extends 'blank.html' %} {% load static %} {% block link %}
-<link rel="stylesheet" href="{% static 'css/checkout.css' %} " />
-{% endblock %} {% block title %}
-<title>Infinity Fashion|checkout</title>
-{% endblock %} {% block content_block %}
 <main>
+  <style>
+    .checkout-main{
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
   <div class="container-fluid">
     <div class="min-height-80 checkout-main">
       <div class="sa-container">
@@ -12,6 +13,7 @@
           <h3 class="sa-card-subheader">Delivery Info</h3>
           <div class="sa-address">{{ address.address }}</div>
           <div class="sa-misc" style="display: flex; flex-direction: column;">
+            <div class="sa-misc-info"><strong>Name: </strong><span>{{ address.name }}</span></div>
             <div class="sa-misc-info"><strong>Town: </strong><span>{{ address.town }}</span></div>
             <div class="sa-misc-info"><strong>Estate/Apt: </strong><span>{{ address.estate }}</span></div>
             <div class="sa-misc-info"><strong>Hse/Apt No: </strong><span >{{ address.apartment }}</span></div>
@@ -38,30 +40,9 @@
           </div>
         </div>
         <div class="pay-btn-container">
-          <button class="btn btn-dark" id="pay-btn" onclick="finishOrder()">Finish</button>
+          <h3><strong>NB:</strong> Cash On Delivery</h3>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    function finishOrder(){
-      location.replace('/shop/clothes/')
-      window.alert('Your Has Been Placed')
-    }
-  </script>
 </main>
-{% endblock %}
-{% block bottom_scripts %}
-<script>
-  var options = {
-
-    {% if user.is_authenticated %}
-  "prefill": {
-    "name": "{{ user.get_full_name }}",
-      "email": "{{ user.email }}",
-        "contact": "{{ user.phno }}"
-  }
-  {% endif %}
-};
-
-  {% endblock %}

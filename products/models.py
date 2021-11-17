@@ -142,19 +142,13 @@ class Wishlist(models.Model):
 
 
 class Order(models.Model):
+    delivered = 1
+    pending= 2
+    cancelled = 3
 
-    waitingconfirmation = 1
-    confirmed = 2
-    processed = 3
-    shipped = 4
-    delivered = 5
-    cancelled = 6
     order_status_choices = [
-        (waitingconfirmation, 'waiting confirmation'),
-        (confirmed, 'confirmed'),
-        (processed, 'processed'),
-        (shipped, 'shipped'),
         (delivered, 'delivered'),
+         (pending, 'pending'),
         (cancelled, 'cancelled')
     ]
 
@@ -166,7 +160,7 @@ class Order(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(get_user_model(), on_delete=models.SET(
-        get_sentinel_user), related_name='orders')
+        get_sentinel_user), related_name='orders', null=True)
     total_quant = models.PositiveIntegerField()
     total_price = models.PositiveIntegerField()  # includes shipping cost
     shipping_cost = models.PositiveIntegerField()
@@ -175,12 +169,13 @@ class Order(models.Model):
     shipping_address = models.ForeignKey(
         Address, on_delete=models.SET_NULL, null=True)
     status = models.PositiveIntegerField(
-        blank=True, choices=order_status_choices, default=waitingconfirmation)
+        blank=True, choices=order_status_choices, default=pending)
     ordered_at = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
         return 'Order No. ' + str(self.id)
+
 
     class Meta:
         ordering = ['-ordered_at']
