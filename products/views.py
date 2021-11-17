@@ -17,7 +17,7 @@ from .utils import *
 
 
 def calculateshipping(total_price):
-    shipping_cost = 0
+    shipping_cost = 150
     amount_payable = total_price + shipping_cost
     return amount_payable, shipping_cost
 
