@@ -29,7 +29,7 @@ def index(request):
     paginator = Paginator(pdlist, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    title = 'Infinity Fashion | ' + "ALL"
+    title = 'FourSixes | ' + "ALL"
     return render(request, 'pdlist.html', context={'pdlist': pdlist, 'page_obj':page_obj, 'title': title})
 
 
@@ -67,7 +67,7 @@ def shopgender(request, type):
     paginator = Paginator(pdlist,20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    title = 'Infinity Fashion | ' + type
+    title = 'FourSixes | ' + type
     return render(request, 'pdlist.html', context={'pdlist': pdlist, 'page_obj':page_obj, 'title': title})
 
 
@@ -303,9 +303,8 @@ def checkout(request):
         pdf = render_to_pdf('order_pdf.html', context)
         if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "order%s.pdf" % (
-                "12341231")
-            content = "inline; filename='%s'" % (filename)
+            filename = "order_%s.pdf" % (order.id)
+            content = "inline; filename= %s " % (filename)
             download = request.GET.get("download")
             if download:
                 content = "attachment; filename='%s'" % (filename)
@@ -323,3 +322,7 @@ def myOrders(request):
   context = {'order':orders}
 
   return render(request, 'orders.html', context)
+
+def contact(request):
+    context = {}
+    return render(request, 'contact.html', context)
