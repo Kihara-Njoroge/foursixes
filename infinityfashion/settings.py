@@ -28,10 +28,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SECRET_KEY = 'django-insecure-eye!!u=1pggnj100)n&a_6ptx-ld$nu@fko22s*-9jp4dg751)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost',  'infinityfashion.herokuapp.com','www.infinityfashion.store','infinityfashion.store']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',  'foursixes.herokuapp.com','www.foursixes.store','foursixes.store']
 
 
 # Application definition
@@ -103,7 +103,7 @@ DATABASES = {
  }
 
 
-DATABASES = {'default': dj_database_url.config(default="postgres://pfkdvteepuygvu:c54ce241489330fa9d59e30e2912737e94a78c21a4112fe293ad876b6a1daee4@ec2-44-199-85-33.compute-1.amazonaws.com:5432/dhkp7q5jh6u9s")}
+DATABASES = {'default': dj_database_url.config(default="postgres://xlrbrkslnycaew:02ffbb2beb2dd51c6b1124d70f27e77e3d9492e6c789dece24d9852f4b9a459e@ec2-107-23-41-227.compute-1.amazonaws.com:5432/d7rrafs604ii83")}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
