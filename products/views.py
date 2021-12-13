@@ -17,7 +17,7 @@ from .utils import *
 
 
 def calculateshipping(total_price):
-    If total_price >= 3000:
+    if total_price >= 3000:
         shipping_cost = 0
     else:
         shipping_cost = 150
