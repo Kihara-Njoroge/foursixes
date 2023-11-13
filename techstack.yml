@@ -1,0 +1,127 @@
+repo_name: Kihara-Njoroge/foursixes
+report_id: f5790dd3c8d2253319ae7786c72e6eba
+repo_type: Public
+timestamp: '2023-11-13T04:39:23+00:00'
+requested_by: Kihara-Njoroge
+provider: github
+branch: socials
+detected_tools_count: 10
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source: Repo Metadata
+- name: Python
+  description: A clear and powerful object-oriented programming language, comparable
+    to Perl, Ruby, Scheme, or Java.
+  website_url: https://www.python.org
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
+- name: PyPI
+  description: A repository of software for the Python programming language
+  website_url: https://pypi.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Hosted Package Repository
+  image_url: https://img.stackshare.io/service/12572/-RIWgodF_400x400.jpg
+  detection_source: requirements.txt
+  last_updated_by: Babuuh
+  last_updated_on: 2021-10-18 18:32:46.000000000 Z
+- name: Pillow
+  description: Python Imaging Library
+  website_url: https://python-pillow.github.io/
+  open_source: true
+  hosted_saas: false
+  category: Assets and Media
+  sub_category: Image Processing and Management
+  image_url: https://img.stackshare.io/service/2375/default_1f67b0ca7416a9f52beb655f90b5602d5ef74b75.jpg
+  detection_source: requirements.txt
+  last_updated_by: Kihara Njoroge
+  last_updated_on: 2021-10-25 17:45:32.000000000 Z
+- name: WeasyPrint
+  description: A smart solution helping web developers to create PDF documents
+  website_url: http://weasyprint.org/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Assets and Media
+  sub_category: File Conversion
+  image_url: https://img.stackshare.io/service/8434/0cf3638fcefdecf6318738ae652eb95c_400x400.png
+  detection_source: requirements.txt
+  last_updated_by: babuuh
+  last_updated_on: 2021-11-22 10:17:17.000000000 Z
+- name: PowerShell
+  description: A task automation and configuration management framework
+  website_url: https://docs.microsoft.com/en-us/powershell/
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/3681/powershell-logo.png
+  detection_source: Repo Metadata
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source: Repo Metadata
+- name: PyPDF2
+  description: PDF toolkit
+  package_url: https://pypi.org/PyPDF2
+  version: 1.26.0
+  license: Other
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20065/default_bb49fb0188726b8922387d8bb6e9b2cd0c3c0ea9.png
+  detection_source_url: requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: babuuh
+  last_updated_on: 2021-11-22 10:17:17.000000000 Z
+  vulnerabilities:
+  - name: PyPDF2 quadratic runtime with malformed PDF missing xref marker
+    cve_id: CVE-2023-36810
+    cve_url: https://github.com/advisories/GHSA-jrm6-h9cq-8gqw
+    detected_date: Jul 1
+    severity: moderate
+    first_patched: 1.27.9
+  - name: Manipulated inline images can cause Infinite Loop in PyPDF2
+    cve_id: CVE-2022-24859
+    cve_url: https://github.com/advisories/GHSA-xcjx-m2pj-8g79
+    detected_date: Apr 27
+    severity: moderate
+    first_patched: 1.27.5
