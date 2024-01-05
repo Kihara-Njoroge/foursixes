@@ -1,7 +1,8 @@
 <!--
---- Readme.md Snippet without images Start ---
+&lt;--- Readme.md Snippet without images Start ---&gt;
 ## Tech Stack
 Kihara-Njoroge/foursixes is built on the following main stack:
+
 - [Python](https://www.python.org) – Languages
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - [Pillow](https://python-pillow.github.io/) – Image Processing and Management
@@ -10,11 +11,13 @@ Kihara-Njoroge/foursixes is built on the following main stack:
 - [WeasyPrint](http://weasyprint.org/) – File Conversion
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet without images End ---
 
---- Readme.md Snippet with images Start ---
+&lt;--- Readme.md Snippet without images End ---&gt;
+
+&lt;--- Readme.md Snippet with images Start ---&gt;
 ## Tech Stack
 Kihara-Njoroge/foursixes is built on the following main stack:
+
 - <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/2375/default_1f67b0ca7416a9f52beb655f90b5602d5ef74b75.jpg' alt='Pillow'/> [Pillow](https://python-pillow.github.io/) – Image Processing and Management
@@ -23,14 +26,15 @@ Kihara-Njoroge/foursixes is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/8434/0cf3638fcefdecf6318738ae652eb95c_400x400.png' alt='WeasyPrint'/> [WeasyPrint](http://weasyprint.org/) – File Conversion
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet with images End ---
+
+&lt;--- Readme.md Snippet with images End ---&gt;
 -->
 <div align="center">
 
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [Kihara-Njoroge/foursixes](https://github.com/Kihara-Njoroge/foursixes)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|10<br/>Tools used|11/13/23 <br/>Report generated|
+|10<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
@@ -133,9 +137,9 @@ Full tech stack [here](/techstack.md)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
-|[PyPDF2](https://pypi.org/PyPDF2)|v1.26.0|11/22/21|babuuh |Other|[CVE-2023-36810](https://github.com/advisories/GHSA-jrm6-h9cq-8gqw) (Moderate)<br/>[CVE-2022-24859](https://github.com/advisories/GHSA-xcjx-m2pj-8g79) (Moderate)|
+|[PyPDF2](https://pypi.org/project/PyPDF2)|v1.26.0|11/22/21|babuuh |Other|[CVE-2023-36810](https://github.com/advisories/GHSA-jrm6-h9cq-8gqw) (Moderate)<br/>[CVE-2022-24859](https://github.com/advisories/GHSA-xcjx-m2pj-8g79) (Moderate)|
 
 <br/>
 <div align='center'>
 
-Generated via [Stack File](https://github.com/apps/stack-file)
+Generated via [Stack File](https://github.com/marketplace/stack-file)
